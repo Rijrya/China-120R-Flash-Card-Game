@@ -153,7 +153,6 @@ def select_lessons():
 
     main_screen()
 
-
 listbox = Listbox(height=13, selectmode=MULTIPLE)
 listbox.insert(0, "L1")
 listbox.insert(1, "L2")
