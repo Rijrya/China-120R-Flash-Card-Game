@@ -147,6 +147,8 @@ def select_lessons():
         words_list = words_list + l11_list
     if 11 in lessons:
         words_list = words_list + l12_list
+    if 12 in lessons:
+        words_list = words_list + l13_list
 
 
     main_screen()
