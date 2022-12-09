@@ -60,7 +60,7 @@ def new_word():
         canvas.itemconfig(card_front_text, text="Restart?", fill="black")
         canvas.itemconfig(card_background, image=card_front)
     else:
-        canvas.itemconfig(card_language, text="Character", fill="black")
+        canvas.itemconfig(card_language, text="Pinyin", fill="black")
         canvas.itemconfig(card_front_text, text=current_card["Pinyin"], fill="black")
         canvas.itemconfig(card_background, image=card_front)
         words_list.remove(current_card)
@@ -71,7 +71,7 @@ def new_word():
 # Flip Card Function
 def flip_card():
     canvas.itemconfig(card_background, image=card_back)
-    canvas.itemconfig(card_language, text="Pinyin", fill="white")
+    canvas.itemconfig(card_language, text="Character", fill="white")
     canvas.itemconfig(card_front_text, text=current_card["Character"], fill="white")
 
 
@@ -114,7 +114,7 @@ def main_screen():
     listbox.destroy()
     canvas.grid(column=0, row=0, columnspan=2, sticky="EW")
     card_language = canvas.create_text(400, 150, text="", font=("Ariel", 40, "italic"))
-    card_front_text = canvas.create_text(400, 263, text="", font=("Ariel", 40, "bold"))
+    card_front_text = canvas.create_text(400, 263, text="", font=("SimHei", 40, "bold"))
     right_button.grid(column=1, row=1)
     wrong_button.grid(column=0, row=1)
     new_word()
