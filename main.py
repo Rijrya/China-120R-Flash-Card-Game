@@ -114,7 +114,7 @@ def main_screen():
     listbox.destroy()
     canvas.grid(column=0, row=0, columnspan=2, sticky="EW")
     card_language = canvas.create_text(400, 150, text="", font=("Ariel", 40, "italic"))
-    card_front_text = canvas.create_text(400, 263, text="", font=("SimHei", 40, "bold"))
+    card_front_text = canvas.create_text(400, 263, width=780, text="", font=("SimHei", 40, "bold"))
     right_button.grid(column=1, row=1)
     wrong_button.grid(column=0, row=1)
     new_word()
