@@ -2,8 +2,6 @@ from tkinter import *
 from pandas import *
 import random
 BACKGROUND_COLOR = "#B1DDC6"
-card_language = ""
-card_front_text = ""
 lessons = ""
 words_list = []
 
@@ -59,6 +57,7 @@ def new_word():
         canvas.itemconfig(card_language, text="No more characters!", fill="black")
         canvas.itemconfig(card_front_text, text="Restart?", fill="black")
         canvas.itemconfig(card_background, image=card_front)
+        back_button.grid(column=0, row=1, columnspan=2)
     else:
         canvas.itemconfig(card_language, text="Pinyin", fill="black")
         canvas.itemconfig(card_front_text, text=current_card["Pinyin"], fill="black")
@@ -73,6 +72,16 @@ def flip_card():
     canvas.itemconfig(card_background, image=card_back)
     canvas.itemconfig(card_language, text="Character", fill="white")
     canvas.itemconfig(card_front_text, text=current_card["Character"], fill="white")
+
+def select_screen():
+    canvas.grid_remove()
+    right_button.grid_remove()
+    wrong_button.grid_remove()
+    back_button.grid_remove()
+    listbox.grid(column=1, row=0, sticky="EW", padx=20, pady=20)
+    main_text.grid(column=0, row=0)
+
+    next_button.grid(column=1, row=1, sticky="EW")
 
 
 # Remove Word Function
@@ -102,19 +111,19 @@ right_button = Button(image=checkmark_image, highlightthickness=0, command=new_w
 
 x_image = PhotoImage(file="./images/wrong.png")
 wrong_button = Button(image=x_image, highlightthickness=0, command=flip_card)
-
-
+back_button = Button(text="Go Back", font=("Arial", 30, "bold"), command=select_screen)
+card_language = canvas.create_text(400, 150, text="", font=("Ariel", 40, "italic"))
+card_front_text = canvas.create_text(400, 263, width=780, text="", font=("SimHei", 40, "bold"))
 # Printing main screen
 
 def main_screen():
     global card_language
     global card_front_text
     global lessons
-    next_button.destroy()
-    listbox.destroy()
+    next_button.grid_remove()
+    listbox.grid_remove()
+    main_text.grid_remove()
     canvas.grid(column=0, row=0, columnspan=2, sticky="EW")
-    card_language = canvas.create_text(400, 150, text="", font=("Ariel", 40, "italic"))
-    card_front_text = canvas.create_text(400, 263, width=780, text="", font=("SimHei", 40, "bold"))
     right_button.grid(column=1, row=1)
     wrong_button.grid(column=0, row=1)
     new_word()
@@ -149,9 +158,8 @@ def select_lessons():
         words_list = words_list + l12_list
     if 12 in lessons:
         words_list = words_list + l13_list
-
-
     main_screen()
+
 
 listbox = Listbox(height=13, selectmode=MULTIPLE)
 listbox.insert(0, "L1")
@@ -167,17 +175,11 @@ listbox.insert(9, "L10")
 listbox.insert(10, "L11")
 listbox.insert(11, "L12")
 listbox.insert(12, "L13")
-
-listbox.grid(column=0, row=0, sticky="EW")
-
-
+main_text = Label(text="Select which lessons to practice: ", font=("Arial", 15, "bold"), bg=BACKGROUND_COLOR)
 next_button = Button(text="Next", command=select_lessons)
-next_button.grid(column=1, row=1, sticky="EW")
 
 
 
-
-
-
+select_screen()
 window.mainloop()
 
